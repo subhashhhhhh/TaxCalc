@@ -18,20 +18,16 @@ const OLD_REGIME_SLABS = [
 ];
 
 function calculateSlabTax(income: number, slabs: typeof NEW_REGIME_SLABS): TaxSlab[] {
-  let remainingIncome = income;
   return slabs.map(slab => {
-    const slabAmount = slab.end
-      ? Math.min(Math.max(0, remainingIncome - slab.start), slab.end - slab.start)
-      : Math.max(0, remainingIncome - slab.start);
-    
-    const tax = (slabAmount * slab.rate) / 100;
-    remainingIncome -= slabAmount;
+    const slabIncome = slab.end
+      ? Math.max(0, Math.min(income, slab.end) - slab.start)
+      : Math.max(0, income - slab.start);
     
     return {
       start: slab.start,
       end: slab.end,
       rate: slab.rate,
-      tax
+      tax: (slabIncome * slab.rate) / 100,
     };
   });
 }
@@ -48,8 +44,8 @@ export function calculateTax(input: TaxInput): TaxDetails {
   
   // Calculate taxable income for both regimes
   const standardDeduction = employmentType === "salaried" ? 75000 : 0;
-  const newRegimeTaxableIncome = income - standardDeduction;
-  const oldRegimeTaxableIncome = income - totalDeductions;
+  const newRegimeTaxableIncome = Math.max(0, income - standardDeduction);
+  const oldRegimeTaxableIncome = Math.max(0, income - totalDeductions);
 
   // Calculate tax for both regimes
   const newRegimeSlabs = calculateSlabTax(newRegimeTaxableIncome, NEW_REGIME_SLABS);
