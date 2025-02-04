@@ -14,6 +14,9 @@ export default function Home() {
         </div>
         <TaxCalculator />
       </div>
+      <footer className="py-6 text-center text-sm text-muted-foreground border-t">
+        Made with ❤️ by Subhash Gottumukkala
+      </footer>
     </main>
   );
 }
