@@ -15,7 +15,7 @@ TaxCalc is a web application designed to calculate Indian income tax for the fin
 - **Responsive Design:**  Works seamlessly on various devices, including desktops, tablets, and mobile phones.
 - **Dark/Light Mode:** Supports both dark and light themes for user preference.
 
-##Screenshots
+## Screenshots
 <div align="center">
   <img src="screens/main-screen.png" alt="Home Screen" width="600"/>
   <p><em>Home Screen with Income Input Form</em></p>
