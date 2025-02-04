@@ -90,7 +90,9 @@ export function TaxResults({ results, onReset }: TaxResultsProps) {
     const oldRegimeTitle = "Old Regime (2024)";
     const oldRegimeTitleWidth = doc.getStringUnitWidth(oldRegimeTitle) * doc.getFontSize() / doc.internal.scaleFactor;
     const oldRegimeTitleX = (pageWidth - oldRegimeTitleWidth) / 2;
-    doc.text(oldRegimeTitle, oldRegimeTitleX, doc.lastAutoTable.finalY + 20);
+    // Get the last table's Y position safely
+    const lastTableY = (doc as any).lastAutoTable?.finalY ?? 65;
+    doc.text(oldRegimeTitle, oldRegimeTitleX, lastTableY + 20);
 
     const oldRegimeData = [
       ...results.oldRegimeSlabs.map(slab => [
@@ -102,7 +104,7 @@ export function TaxResults({ results, onReset }: TaxResultsProps) {
     ];
     
     (doc as any).autoTable({
-      startY: doc.lastAutoTable.finalY + 25,
+      startY: (doc as any).lastAutoTable?.finalY + 25,
       head: [["Income Range", "Rate", "Tax"]],
       body: oldRegimeData,
       theme: 'grid',
@@ -123,7 +125,7 @@ export function TaxResults({ results, onReset }: TaxResultsProps) {
     const recommendationText = `Recommendation: Choose ${betterRegime.regime} Regime to save ${formatCurrency(betterRegime.savings).replace(/[₹,]/g, '')}`;
     const recommendationWidth = doc.getStringUnitWidth(recommendationText) * doc.getFontSize() / doc.internal.scaleFactor;
     const recommendationX = (pageWidth - recommendationWidth) / 2;
-    doc.text(recommendationText, recommendationX, doc.lastAutoTable.finalY + 20);
+    doc.text(recommendationText, recommendationX, (doc as any).lastAutoTable?.finalY + 20);
     
     // Add website link - centered
     doc.setTextColor(0, 0, 255);
@@ -134,7 +136,7 @@ export function TaxResults({ results, onReset }: TaxResultsProps) {
     doc.textWithLink(
       ctaText,
       ctaX,
-      doc.lastAutoTable.finalY + 30,
+      ((doc as any).lastAutoTable?.finalY ?? 65) + 30,
       { url: 'https://tax.subhashh.tech' }
     );
     
