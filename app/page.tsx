@@ -15,7 +15,7 @@ export default function Home() {
         <TaxCalculator />
       </div>
       <footer className="py-6 text-center text-sm text-muted-foreground border-t">
-        Made with ❤️ by Subhash Gottumukkala
+        Made with ❤️ by <a href="https://subhashh.tech" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Subhash Gottumukkala</a>
       </footer>
     </main>
   );

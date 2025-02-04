@@ -51,7 +51,7 @@ export function DeductionsForm({ form, onBack, onNext }: DeductionsFormProps) {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
+                    type="text"
                     autoComplete="off"
                     inputMode="numeric"
                     {...field}
@@ -84,12 +84,19 @@ export function DeductionsForm({ form, onBack, onNext }: DeductionsFormProps) {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    type="number"
+                    type="text"
                     placeholder="Enter HRA amount"
                     autoComplete="off"
                     inputMode="numeric"
-                    {...field}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    pattern="\d*"
+                    value={field.value === 0 ? '' : field.value}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      // Allow empty string or numbers only
+                      if (value === '' || /^\d+$/.test(value)) {
+                        field.onChange(value === '' ? 0 : Number(value));
+                      }
+                    }}
                   />
                 </FormControl>
                 <FormMessage />
@@ -119,12 +126,19 @@ export function DeductionsForm({ form, onBack, onNext }: DeductionsFormProps) {
             </FormLabel>
             <FormControl>
               <Input
-                type="number"
+                type="text"
                 placeholder="Enter 80C investments"
                 autoComplete="off"
                 inputMode="numeric"
-                {...field}
-                onChange={(e) => field.onChange(Number(e.target.value))}
+                pattern="\d*"
+                value={field.value === 0 ? '' : field.value}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Allow empty string or numbers only
+                  if (value === '' || /^\d+$/.test(value)) {
+                    field.onChange(value === '' ? 0 : Number(value));
+                  }
+                }}
               />
             </FormControl>
             <FormMessage />
@@ -152,12 +166,19 @@ export function DeductionsForm({ form, onBack, onNext }: DeductionsFormProps) {
             </FormLabel>
             <FormControl>
               <Input
-                type="number"
+                type="text"
                 placeholder="Enter health insurance premium"
                 autoComplete="off"
                 inputMode="numeric"
-                {...field}
-                onChange={(e) => field.onChange(Number(e.target.value))}
+                pattern="\d*"
+                value={field.value === 0 ? '' : field.value}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  // Allow empty string or numbers only
+                  if (value === '' || /^\d+$/.test(value)) {
+                    field.onChange(value === '' ? 0 : Number(value));
+                  }
+                }}
               />
             </FormControl>
             <FormMessage />
