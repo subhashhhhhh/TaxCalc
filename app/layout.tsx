@@ -18,6 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          defer
+          src="https://analytics.subhashh.tech/script.js"
+          data-website-id="66bfd030-328e-411d-afd2-0125563d8475"
+        />
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
